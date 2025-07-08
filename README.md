@@ -1,71 +1,87 @@
-# React Native 原生 UI 组件
+# NestedScrollView
 
-本仓库包含一系列原生组件：
+`NestedScrollView` 是一个 React Native 原生 UI 组件。
 
-## 版本兼容
+主要用来实现如下结构的视图：
 
-| 版本       | RN 版本 | 新旧架构 |
-| ---------- | ------- | -------- |
-| 0.x        | >= 0.67 | 旧架构   |
-| 1.x（WIP） | >= 0.76 | 新架构   |
+![README-2023-10-30-15-06-11](./docs/assets/struct.png)
 
-| RN 版本                           | iOS                                 | Android                               | 三方库版本                                                                                                |
-| --------------------------------- | ----------------------------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| 0.72(2023.06)                     | 最低支持 iOS 12.4                   |                                       |                                                                                                           |
-| 0.73(2023.11)                     | 最低支持 iOS 13.4                   | 支持 Android 14<br>必须 Java 17       | react-native-gesture-handler@2.14.0,<br>react-native-reanimated@3.15.0,<br>react-native-drop-shadow@1.0.0 |
-| 0.74(2024.04)                     | arm64 设置                          | minSdkVersion 23                      | react-native-safe-area-context@^5.4.0                                                                     |
-| 0.75(2024.08)                     |                                     | 用 **kotlin** 实现<br>仅支持 androidx |                                                                                                           |
-| 0.76(2024.10)<br>支持 `boxShadow` | 最低支持 iOS 15.1<br>支持 Xcode16.3 | minSdkVersion 24                      | react-native-reanimated@^3.17.5                                                                           |
-| 0.77(2025.01)                     | Swift 模版                          | 支持 Android 15<br>16 KB pages        | react-native-gesture-handler@^2.25.0 <br>react-native-drop-shadow@^1.0.3                                  |
+最外层是一个可纵向滚动的视图， 也就是我们的 `NestedScrollView`， 它的子组件往往由一个头部和一个可横向滚动的视图组成。
 
-## 库
+这个可横向滚动的视图在 React Native 中通常是设置了 `horizontal` 属性的 `ScrollView`，也可以是 `PagerView`。
 
-### [NestedScrollView](./packages/nested-scroll/README.md)
+最里层是若干也可以纵向滚动的视图，譬如 `ScrollView`、`FlashList`、`WebView` 等等。
 
-用于实现嵌套滚动，使用简单。可以和 PagerView，TabView 等组合使用。
+`NestedScrollView` 的作用是协调最里层和最外层可滚动视图之间的（纵向）滚动，使得滚动体验更加流畅。
 
-<img src="./packages/nested-scroll/docs/assets/struct.png">
+|                                                  |                                                    |
+| ------------------------------------------------ | -------------------------------------------------- |
+| <img src="./docs/assets/sticky.gif" width="320"> | <img src="./docs/assets/parallax.gif" width="320"> |
 
-### [PullToRefresh](./packages/pull-to-refresh/README.md)
+## Installation
 
-提供了在 React 层自定义下拉刷新的能力。
+```sh
+yarn add @sdcx/nested-scroll
+# &
+pod install
+```
 
-<img src="./packages/pull-to-refresh/docs/assets/separated.gif" width="320">
+## Usage
 
-### [BottomSheet](./packages/bottom-sheet/README.md)
+`NestedScrollView` 在使用上比较简单
 
-将 Android 的 [BottomSheetBehavior](https://developer.android.com/reference/com/google/android/material/bottomsheet/BottomSheetBehavior) 迁移到了 React Native 中，在 API 设计上也尽量和 Android 保持一致，同时支持 iOS。
+```tsx
+import { NestedScrollView, NestedScrollViewHeader } from '@sdcx/nested-scroll'
 
-<img src="./packages/bottom-sheet/docs/assets/pagerview.gif" width="320">
+const App = () => {
+  return (
+    <NestedScrollView>
+      <NestedScrollViewHeader stickyHeaderBeginIndex={1}>
+        <Image />
+        <TabBar />
+      </NestedScrollViewHeader>
+      <PagerView>
+        <FlatList nestedScrollEnabled />
+        <ScrollView nestedScrollEnabled />
+        <WebView />
+      </PagerView>
+    </NestedScrollView>
+  )
+}
+```
 
-### [ActivityIndicator](./packages/activity-indicator/README.md)
+> :exclamation: :exclamation: :exclamation:
+> Android 是基于 [NestedScrolling API](https://developer.android.com/reference/androidx/core/view/NestedScrollingChild) 实现的。
+>
+> <h3>请记得为你的列表开启 `nestedScrollEnabled` 属性。</h3>
+>
+> :exclamation: :exclamation: :exclamation:
 
-在 Android 上实现了和 iOS 类似的菊花组件。
+## API
 
-<img src="./packages/activity-indicator/docs/assets/activity.png" width="320">
+### NestedScrollView
 
-### [ImageCropView](./packages/image-crop/README.md)
+`NestedScrollView` 只有两个属于自己的属性
 
-用来实现头像裁剪，和社区其它方安不同，仅仅只是个 View，非常方便页面的自定义布局。
+- `bounces`：仅限于 iOS 平台，用于设置 `NestedScrollView` 是否有弹性，默认为 `false`。一旦设置为 `true`，最内层可滚动视图将失去弹性。
 
-也可以用来实现图片裁剪，支持设置裁剪区域。
+- `contentContainerStyle`：仅限于 Android 平台，用于设置 `NestedScrollView` 的 contentView 的样式。
 
-### [KeyboardInsetsView](./packages/keyboard-insets/README.md)
+### NestedScrollViewHeader
 
-KeyboardInsetsView 是一个 React Native 原生 UI 组件，用于处理软键盘遮挡输入框的问题。自动模式下使用非常简单，不需要额外代码来处理键盘。
+- `stickyHeaderBeginIndex`，它表示从第几个子组件开始，子组件将会被固定在顶部。
 
-如果想要实现类似聊天界面那样的效果，也不在话下。
+- `stickyHeight`，它表示 header 多高的区域将会被固定在顶部，优先级高于 `stickyHeaderBeginIndex`。
 
-<img src="./packages/keyboard-insets/docs/assets/chat.gif" width="320">
+- `onScroll`， 是一个回调函数，可用于实现头部视图的视差效果。
 
-### [Overlay](./packages/overlay/README.md)
-
-`Overlay` 是一个 React Native 原生 UI 基础设施，它漂浮在你的 React Native 应用之上，可用于实现 Modal, Alert, Toast, Popover, Notification, Hoverball 等顶层 UI。
-
-### [WheelPicker](./packages/wheel-picker/README.md)
-
-一个非常简单的 WheelPicker
-
-一个非常帅的 WheelPicker
-
-<img src="./packages/wheel-picker/docs/assets/wheelpicker.png" width="320">
+  ```ts
+  type OnScroll = (event: {
+    nativeEvent: {
+      contentOffset: {
+        x: number
+        y: number
+      }
+    }
+  }) => void
+  ```
