@@ -1,23 +1,20 @@
 {
-  "name": "@sdcx/nested-scroll",
+  "name": "@react-native-oh-tpl/react-native-nested-scroll",
   "description": "A react-native NestedScrollView component.",
-  "version": "0.14.0",
+  "harmony": {
+    "alias": "react-native-nested-scroll"
+  },
+  "version": "0.14.0-rc.1",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "react-native": "src/index",
   "nativePackage": true,
   "files": [
+    "harmony",
     "src",
-    "dist",
-    "android",
-    "ios",
-    "RNNestedScrollView.podspec",
-    "!android/build",
-    "!ios/build",
-    "!**/__tests__"
+	"package.json"
   ],
-  "repository": "https://github.com/sdcxtech/react-native-troika",
-  "homepage": "https://github.com/sdcxtech/react-native-troika/tree/master/packages/nested-scroll/README.md",
+  "repository": "https://github.com/react-native-oh-library/react-native-nested-scroll",
   "author": "sdcx",
   "license": "MIT",
   "keywords": [

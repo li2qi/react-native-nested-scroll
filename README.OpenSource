@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "react-native-nested-scroll",
+        "License": "MIT License",
+        "License File": "LICENSE",
+        "Version Number": "0.14.0",
+        "Owner" : "xiafeng@huawei.com",
+        "Upstream URL": "https://github.com/sdcxtech/react-native-troika/tree/master/packages/nested-scroll",
+        "Description": "The purpose of NestedScrollView is to coordinate (portrait) scrolling between the innermost and outermost scrollable views, making the scrolling experience smoother."
+    }
+]

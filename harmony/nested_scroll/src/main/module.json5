@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "nested_scroll",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet",
+      "2in1"
+    ]
+  }
+}

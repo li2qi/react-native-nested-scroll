@@ -1,33 +1,19 @@
-import React from 'react';
-import {
-  NativeScrollPoint,
-  NativeSyntheticEvent,
-  requireNativeComponent,
-  ViewProps,
-} from 'react-native';
+import React from 'react'
+import { NativeScrollPoint, NativeSyntheticEvent, requireNativeComponent, ViewProps } from 'react-native'
 
-interface NestedScrollEventData {
-  contentOffset: NativeScrollPoint;
-}
+import NestedScrollViewHeaderNative from './nestedScrollHeaderNativeComponent'
+import {NestedScrollViewHeaderProps} from './nestedScrollHeaderNativeComponent'
 
-export type NestedScrollEvent = NativeSyntheticEvent<NestedScrollEventData>;
 
-export interface NestedScrollViewHeaderProps extends ViewProps {
-  stickyHeight?: number;
-  stickyHeaderBeginIndex?: number;
-  onScroll?: (event: NestedScrollEvent) => void;
-}
+const NativeNestedScrollViewHeader = NestedScrollViewHeaderNative
+// const NativeNestedScrollViewHeader = requireNativeComponent<NestedScrollViewHeaderProps>('NestedScrollViewHeader')
 
-const NativeNestedScrollViewHeader =
-  requireNativeComponent<NestedScrollViewHeaderProps>('NestedScrollViewHeader');
+type NativeNestedScrollViewHeaderInstance = InstanceType<typeof NativeNestedScrollViewHeader>
 
-type NativeNestedScrollViewHeaderInstance = InstanceType<typeof NativeNestedScrollViewHeader>;
+const NestedScrollViewHeader = React.forwardRef<NativeNestedScrollViewHeaderInstance, NestedScrollViewHeaderProps>(
+  (props, ref) => {
+    return <NativeNestedScrollViewHeader {...props} ref={ref} />
+  },
+)
 
-const NestedScrollViewHeader = React.forwardRef<
-  NativeNestedScrollViewHeaderInstance,
-  NestedScrollViewHeaderProps
->((props, ref) => {
-  return <NativeNestedScrollViewHeader {...props} ref={ref} />;
-});
-
-export {NestedScrollViewHeader};
+export { NestedScrollViewHeader }

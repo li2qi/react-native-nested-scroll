@@ -1,56 +1,18 @@
-import React, {PropsWithChildren} from 'react';
+import React from 'react'
+import NestedScrollViewNativeComponent from './nestedScrollNativeComponent'
+import {NestScrollProps as NestedScrollViewProps} from "./nestedScrollNativeComponent"
 import {
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  Platform,
-  requireNativeComponent,
-  StyleProp,
   StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
+} from 'react-native'
 
-export type NestedScrollViewProps = PropsWithChildren<{
-  style?: StyleProp<ViewStyle>;
-  onScroll?: (event: NativeSyntheticEvent<Omit<NativeScrollEvent, 'velocity'>>) => void;
-  //Android Only
-  contentContainerStyle?: StyleProp<ViewStyle>;
-  //iOS Only
-  bounces?: boolean;
-}>;
+const NestedScrollViewNative = NestedScrollViewNativeComponent;
 
-type NestedScrollViewNativeProps = Omit<NestedScrollViewProps, 'contentContainerStyle'>;
-
-const NestedScrollViewNative =
-  requireNativeComponent<NestedScrollViewNativeProps>('NestedScrollView');
-
-function NestedScrollView({children, style, ...props}: NestedScrollViewProps) {
-  if (Platform.OS === 'android') {
-    return (
-      <NestedScrollViewAndroid style={[styles.fill, style]} {...props}>
-        {children}
-      </NestedScrollViewAndroid>
-    );
-  }
+function NestedScrollView({ children, style, ...props }: NestedScrollViewProps) {      
   return (
-    <NestedScrollViewNative style={[styles.fill, style]} {...props}>
+    <NestedScrollViewNative style={[styles.fill, style]} {...props} >
       {children}
     </NestedScrollViewNative>
-  );
-}
-
-export function NestedScrollViewAndroid({
-  children,
-  contentContainerStyle,
-  ...props
-}: NestedScrollViewProps) {
-  return (
-    <NestedScrollViewNative {...props}>
-      <View style={[styles.content, contentContainerStyle]} collapsable={false}>
-        {children}
-      </View>
-    </NestedScrollViewNative>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -60,10 +22,8 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
   },
-});
+})
 
-export {NestedScrollView};
+export { NestedScrollView }
 
-export {NestedScrollViewHeader} from './NestedScrollViewHeader';
-
-export type {NestedScrollEvent, NestedScrollViewHeaderProps} from './NestedScrollViewHeader';
+export { NestedScrollViewHeader } from './NestedScrollViewHeader'
