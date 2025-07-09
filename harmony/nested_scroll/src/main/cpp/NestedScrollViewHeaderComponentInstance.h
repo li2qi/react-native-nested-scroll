@@ -42,9 +42,9 @@ private:
 public:
     
     float stickyHeight;
-    float stickyHeaderHeight;
+    float stickyHeaderHeight = 0.0f;
     int stickyHeaderBeginIndex;
-    int beginIndex;
+    int beginIndex = 0;
     NestedScrollViewHeaderComponentInstance(Context context);
     void onChildInserted(ComponentInstance::Shared const &childComponentInstance, std::size_t index) override;
     void onFinalizeUpdates();
