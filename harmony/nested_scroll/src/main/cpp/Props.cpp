@@ -38,8 +38,8 @@ RNCNestedScrollViewHeaderProps::RNCNestedScrollViewHeaderProps(const PropsParser
                                                    const RNCNestedScrollViewHeaderProps &sourceProps,
                                                    const RawProps &rawProps)
     : ViewProps(context, sourceProps, rawProps), 
-      stickyHeight(convertRawProp(context, rawProps, "stickyHeight", sourceProps.stickyHeight, {0.0})),
-      stickyHeaderBeginIndex(convertRawProp(context, rawProps, "stickyHeaderBeginIndex", sourceProps.stickyHeaderBeginIndex, {1.0}))
+      stickyHeight(convertRawProp(context, rawProps, "stickyHeight", sourceProps.stickyHeight, {-1})),
+      stickyHeaderBeginIndex(convertRawProp(context, rawProps, "stickyHeaderBeginIndex", sourceProps.stickyHeaderBeginIndex, {-1}))
     {}
 } // namespace react
 } // namespace facebook

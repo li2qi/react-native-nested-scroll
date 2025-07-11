@@ -51,8 +51,8 @@ public:
     RNCNestedScrollViewHeaderProps(const PropsParserContext &context, const RNCNestedScrollViewHeaderProps &sourceProps,
                              const RawProps &rawProps);
 #pragma mark - Props
-    float stickyHeight{0.0};
-    float stickyHeaderBeginIndex{0.0};
+    float stickyHeight{-1};
+    float stickyHeaderBeginIndex{-1};
     std::vector<float> viewBox{};
 };
 

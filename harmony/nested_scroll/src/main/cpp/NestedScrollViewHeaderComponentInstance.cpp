@@ -41,11 +41,11 @@ void NestedScrollViewHeaderComponentInstance::onChildInserted(ComponentInstance:
     CppComponentInstance::onChildInserted(childComponentInstance, index);
     auto item = NativeNodeApi::getInstance()->getAttribute(
     childComponentInstance->getLocalRootArkUINode().getArkUINodeHandle(), NODE_HEIGHT);
-    if (stickyHeight > 0 || stickyHeaderBeginIndex > 0) {
-        if (stickyHeight > 0) {//stickyHeight 优先级 高于 stickyHeaderBeginIndex
+    if (stickyHeight >= 0 || stickyHeaderBeginIndex >= 0) {
+        if (stickyHeight >= 0) {//stickyHeight 优先级 高于 stickyHeaderBeginIndex
             stickyHeaderHeight = stickyHeight;
             mNestedScrollHeaderNode.insertChild(childComponentInstance->getLocalRootArkUINode(),index);
-        } else if (stickyHeaderBeginIndex > 0) {
+        } else if (stickyHeaderBeginIndex >= 0) {
             if(beginIndex >= stickyHeaderBeginIndex) {
                 stickyHeaderHeight += childComponentInstance->getLayoutMetrics().frame.size.height;
             }
