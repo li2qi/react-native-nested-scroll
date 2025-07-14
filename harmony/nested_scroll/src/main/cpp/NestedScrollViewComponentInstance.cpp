@@ -38,6 +38,8 @@ NestedScrollViewComponentInstance::NestedScrollViewComponentInstance(Context con
 
 void NestedScrollViewComponentInstance::onFinalizeUpdates() {
   ComponentInstance::onFinalizeUpdates();
+    float scrollHeight = headerHeight - rNCNestedScrollViewHeaderNative->stickyHeaderHeight;
+    fixColumnAll.setHeight(layoutMetricsHeight + scrollHeight);
     mNestedScrollNode.insertChild(fixColumnAll, 0);
     mNestedScrollNode.setAlignment(ARKUI_ALIGNMENT_TOP);
 }
@@ -48,16 +50,20 @@ void NestedScrollViewComponentInstance::onChildInserted(
     if (childComponentInstance->getComponentName() == "RNCNestedScrollViewHeaderNative") {
         elementPositionRelativeFixHeader = true;//记录元素在固定的头部还是尾部
         rNCNestedScrollViewHeaderNative = std::dynamic_pointer_cast<NestedScrollViewHeaderComponentInstance>(childComponentInstance);
-        float scrollHeight = childComponentInstance->getLayoutMetrics().frame.size.height - 
-            rNCNestedScrollViewHeaderNative->stickyHeaderHeight;
-        fixColumnAll.setHeight(m_layoutMetrics.frame.size.height + scrollHeight);
+        headerHeight = childComponentInstance->getLayoutMetrics().frame.size.height;
         fixColumnAll.insertChild(childComponentInstance->getLocalRootArkUINode(), index);
     } else {
         handleScrollView(childComponentInstance);
-        childComponentInstance->getLocalRootArkUINode().setHeight(m_layoutMetrics.frame.size.height - rNCNestedScrollViewHeaderNative->stickyHeaderHeight);
         fixColumnAll.insertChild(childComponentInstance->getLocalRootArkUINode(), index);
     }
 }
+
+void NestedScrollViewComponentInstance::onLayoutChanged(
+    const facebook::react::LayoutMetrics& layoutMetrics) {
+    CppComponentInstance::onLayoutChanged(layoutMetrics);
+    layoutMetricsHeight = layoutMetrics.frame.size.height;
+}
+
 
 void NestedScrollViewComponentInstance::handleScrollView(ComponentInstance::Shared childComponentInstance){
      if (OH_ArkUI_NodeUtils_GetNodeType(childComponentInstance->getLocalRootArkUINode().getArkUINodeHandle()) == 

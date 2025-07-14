@@ -85,7 +85,6 @@ namespace rnoh {
             };
         }
         EventEmitRequestHandlers createEventEmitRequestHandlers() override {
-            LOG(INFO)<<"liqi LIQIonScroll======NestedScrollViewPackage onScroll";
             return {
                 std::make_shared<NestedScrollViewEmitRequestHandler>(), 
                 std::make_shared<NestedScrollViewHeaderEmitRequestHandler>()};

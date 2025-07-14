@@ -46,6 +46,8 @@ public:
     NestedScrollViewNode mNestedScrollNode;
     NestedScrollViewHeaderNode fixColumnAll;
     void onFinalizeUpdates();
+    float headerHeight = 0;
+    float layoutMetricsHeight = 0;
     NestedScrollViewComponentInstance(Context context);
     void onChildInserted(ComponentInstance::Shared const &childComponentInstance, std::size_t index) override;
 
@@ -53,7 +55,8 @@ public:
     NestedScrollViewNode &getLocalRootArkUINode() override;
     void onPropsChanged(SharedConcreteProps const &props) override;
     void onScroll(facebook::react::NestedScrollViewEventEmitter::NestedScrollEvent nestedScrollEvent) override;
-    
+    void onLayoutChanged(
+      const facebook::react::LayoutMetrics& layoutMetrics) override;
     void handleScrollView(ComponentInstance::Shared childComponentInstance);
 };
 } // namespace rnoh
