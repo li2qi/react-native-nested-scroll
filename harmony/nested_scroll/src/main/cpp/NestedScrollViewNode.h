@@ -48,6 +48,7 @@ namespace rnoh {
         void onNodeEvent(ArkUI_NodeEventType eventType, EventArgs& eventArgs) override;
         void setScrollNodeDelegate(NestedScrollNodeDelegate *scrollNodeDelegate);
         void setScrollBarOff(ArkUI_NodeHandle node);
+        facebook::react::Point getScrollOffset() const;
     };
 
 } // namespace rnoh

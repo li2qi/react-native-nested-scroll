@@ -68,6 +68,14 @@ void NestedScrollViewNode::setScrollNodeDelegate(NestedScrollNodeDelegate *scrol
     m_scrollNodeDelegate = scrollNodeDelegate;
 }
 
+facebook::react::Point NestedScrollViewNode::getScrollOffset() const {
+    auto item = NativeNodeApi::getInstance()->getAttribute(
+      m_nodeHandle, NODE_SCROLL_OFFSET);
+    facebook::react::Float x = item->value[0].f32;
+    facebook::react::Float y = item->value[1].f32;
+    return facebook::react::Point{x, y};
+}
+
 void NestedScrollViewNode::onNodeEvent(ArkUI_NodeEventType eventType, EventArgs &eventArgs) {
         if (m_scrollNodeDelegate == nullptr)
             return;

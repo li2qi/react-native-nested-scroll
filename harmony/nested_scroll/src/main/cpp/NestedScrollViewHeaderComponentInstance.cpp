@@ -24,8 +24,6 @@
 
 #include "NestedScrollViewComponentInstance.h"
 #include "NestedScrollViewHeaderComponentInstance.h"
-#include <glog/logging.h>
-#include "RNOH/ArkTSBridge.h"
 
 namespace rnoh {
 NestedScrollViewHeaderComponentInstance::NestedScrollViewHeaderComponentInstance(Context context)

@@ -32,8 +32,12 @@ namespace rnoh {
 NestedScrollViewComponentInstance::NestedScrollViewComponentInstance(Context context)
     : CppComponentInstance(std::move(context)) {
     mNestedScrollNode.setScrollNodeDelegate(this);
-    NativeNodeApi::getInstance()->registerNodeEvent(mNestedScrollNode.getArkUINodeHandle(), NODE_SCROLL_EVENT_ON_SCROLL,
-                                                        NODE_SCROLL_EVENT_ON_SCROLL, this);
+    mNestedScrollNode.setAlignment(ARKUI_ALIGNMENT_TOP);
+}
+
+facebook::react::Point NestedScrollViewComponentInstance::getCurrentOffset() const {
+  auto offset = mNestedScrollNode.getScrollOffset();
+  return offset;
 }
 
 void NestedScrollViewComponentInstance::onFinalizeUpdates() {
@@ -41,7 +45,6 @@ void NestedScrollViewComponentInstance::onFinalizeUpdates() {
     float scrollHeight = headerHeight - rNCNestedScrollViewHeaderNative->stickyHeaderHeight;
     fixColumnAll.setHeight(layoutMetricsHeight + scrollHeight);
     mNestedScrollNode.insertChild(fixColumnAll, 0);
-    mNestedScrollNode.setAlignment(ARKUI_ALIGNMENT_TOP);
 }
 
 void NestedScrollViewComponentInstance::onChildInserted(
