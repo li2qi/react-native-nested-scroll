@@ -36,6 +36,9 @@ namespace rnoh {
      };
 
     class NestedScrollViewNode : public ArkUINode {
+    private:
+        bool setNestedScrollResult = true;
+        ComponentInstance::Shared child;
     protected:
         NestedScrollNodeDelegate *m_scrollNodeDelegate;
     public:
@@ -48,6 +51,9 @@ namespace rnoh {
         void onNodeEvent(ArkUI_NodeEventType eventType, EventArgs& eventArgs) override;
         void setScrollNodeDelegate(NestedScrollNodeDelegate *scrollNodeDelegate);
         void setScrollBarOff(ArkUI_NodeHandle node);
+        void handleScrollView(ComponentInstance::Shared childComponentInstance);
+        void setChild(ComponentInstance::Shared childComponentInstance);
+        void handleScroll();
         facebook::react::Point getScrollOffset() const;
     };
 

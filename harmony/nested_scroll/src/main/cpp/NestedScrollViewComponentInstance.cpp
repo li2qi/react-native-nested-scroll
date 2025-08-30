@@ -42,7 +42,10 @@ facebook::react::Point NestedScrollViewComponentInstance::getCurrentOffset() con
 
 void NestedScrollViewComponentInstance::onFinalizeUpdates() {
   ComponentInstance::onFinalizeUpdates();
-    float scrollHeight = headerHeight - rNCNestedScrollViewHeaderNative->stickyHeaderHeight;
+    float scrollHeight = 0.0f;
+    if (rNCNestedScrollViewHeaderNative != nullptr) {
+        scrollHeight = headerHeight - rNCNestedScrollViewHeaderNative->stickyHeaderHeight;
+    }
     fixColumnAll.setHeight(layoutMetricsHeight + scrollHeight);
     mNestedScrollNode.insertChild(fixColumnAll, 0);
 }
@@ -56,7 +59,7 @@ void NestedScrollViewComponentInstance::onChildInserted(
         headerHeight = childComponentInstance->getLayoutMetrics().frame.size.height;
         fixColumnAll.insertChild(childComponentInstance->getLocalRootArkUINode(), index);
     } else {
-        handleScrollView(childComponentInstance);
+        this->getLocalRootArkUINode().setChild(childComponentInstance);
         fixColumnAll.insertChild(childComponentInstance->getLocalRootArkUINode(), index);
     }
 }
@@ -66,22 +69,6 @@ void NestedScrollViewComponentInstance::onLayoutChanged(
     CppComponentInstance::onLayoutChanged(layoutMetrics);
     layoutMetricsHeight = layoutMetrics.frame.size.height;
 }
-
-
-void NestedScrollViewComponentInstance::handleScrollView(ComponentInstance::Shared childComponentInstance){
-     if (OH_ArkUI_NodeUtils_GetNodeType(childComponentInstance->getLocalRootArkUINode().getArkUINodeHandle()) == 
-         ARKUI_NODE_SCROLL ) {
-        this->getLocalRootArkUINode().setScrollBarOff(childComponentInstance->getLocalRootArkUINode().getArkUINodeHandle());
-        this->getLocalRootArkUINode().setBounce(childComponentInstance->getLocalRootArkUINode().getArkUINodeHandle(), bounces);
-        this->getLocalRootArkUINode().setNestedScrollMode(childComponentInstance);
-    } else {
-        std::vector<ComponentInstance::Shared> children = childComponentInstance->getChildren();
-        for (int childrenIndex = 0; childrenIndex < children.size(); childrenIndex++) {
-            handleScrollView(children[childrenIndex]);
-        }
-    }
-}
-
 void NestedScrollViewComponentInstance::onChildRemoved(
     ComponentInstance::Shared const& childComponentInstance) {
   CppComponentInstance::onChildRemoved(childComponentInstance);

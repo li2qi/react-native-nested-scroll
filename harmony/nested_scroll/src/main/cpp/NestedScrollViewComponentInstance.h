@@ -56,7 +56,6 @@ public:
     void onPropsChanged(SharedConcreteProps const &props) override;
     void onScroll(facebook::react::NestedScrollViewEventEmitter::NestedScrollEvent nestedScrollEvent) override;
     void onLayoutChanged(const facebook::react::LayoutMetrics& layoutMetrics) override;
-    void handleScrollView(ComponentInstance::Shared childComponentInstance);
     facebook::react::Point getCurrentOffset() const override;
 };
 } // namespace rnoh

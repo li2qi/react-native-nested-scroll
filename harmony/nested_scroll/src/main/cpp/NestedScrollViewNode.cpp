@@ -27,13 +27,58 @@
 #include "RNOHCorePackage/ComponentInstances/ScrollViewComponentInstance.h"
 
 namespace rnoh {
+static void receiveEvent(ArkUI_NodeEvent* event) {
+#ifdef C_API_ARCH
+  try {
+    auto eventType = OH_ArkUI_NodeEvent_GetEventType(event);
+    auto target = static_cast<NestedScrollViewNode*>(
+        OH_ArkUI_NodeEvent_GetUserData(event));
+
+    if (eventType == ArkUI_NodeEventType::NODE_TOUCH_EVENT) {
+      target->handleScroll();
+      return;
+    }
+  } catch (std::exception& e) {
+    LOG(ERROR) << e.what();
+  }
+#endif
+}
+
 NestedScrollViewNode::NestedScrollViewNode()
     : ArkUINode(NativeNodeApi::getInstance()->createNode(ArkUI_NodeType::ARKUI_NODE_SCROLL)) {
     NativeNodeApi::getInstance()->registerNodeEvent(m_nodeHandle, NODE_SCROLL_EVENT_ON_SCROLL,
                                                         NODE_SCROLL_EVENT_ON_SCROLL, this);
+    NativeNodeApi::getInstance()->registerNodeEvent(m_nodeHandle, NODE_TOUCH_EVENT,
+                                                        NODE_SCROLL_EVENT_ON_SCROLL, this);
+    maybeThrow(NativeNodeApi::getInstance()->addNodeEventReceiver(m_nodeHandle, receiveEvent));
 }
 
 NestedScrollViewNode::~NestedScrollViewNode() {
+}
+
+void NestedScrollViewNode::handleScroll() {
+    if (setNestedScrollResult) {
+        setNestedScrollResult = !setNestedScrollResult;
+        handleScrollView(child);
+    }
+}
+
+void NestedScrollViewNode::setChild(ComponentInstance::Shared childComponentInstance) {
+    child = childComponentInstance;
+}
+
+void NestedScrollViewNode::handleScrollView(ComponentInstance::Shared childComponentInstance){
+     if (OH_ArkUI_NodeUtils_GetNodeType(childComponentInstance->getLocalRootArkUINode().getArkUINodeHandle()) == 
+         ARKUI_NODE_SCROLL ) {
+        setNestedScrollMode(childComponentInstance);
+    } else {
+        std::vector<ComponentInstance::Shared> children = childComponentInstance->getChildren();
+        if (children.size() > 0) {
+            for (int childrenIndex = 0; childrenIndex < children.size(); childrenIndex++) {
+                handleScrollView(children[childrenIndex]);
+            }
+        }
+    }
 }
 
 void NestedScrollViewNode::insertChild(ArkUINode &child, std::size_t index) {
