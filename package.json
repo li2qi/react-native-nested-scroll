@@ -1,7 +1,7 @@
 {
   "name": "@react-native-oh-tpl/react-native-nested-scroll",
   "description": "A react-native NestedScrollView component.",
-  "version": "0.14.2-rc.1",
+  "version": "0.14.2-rc.2",
   "main": "./src/index.tsx",
   "react-native": "src/index",
   "nativePackage": true,
