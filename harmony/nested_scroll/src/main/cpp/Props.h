@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-#ifndef HARMONY_CLIP_PATH_VIEW_SRC_MAIN_CPP_PROPS_H
-#define HARMONY_CLIP_PATH_VIEW_SRC_MAIN_CPP_PROPS_H
+#ifndef HARMONY_NESTED_SCROLL_SRC_MAIN_CPP_PROPS_H
+#define HARMONY_NESTED_SCROLL_SRC_MAIN_CPP_PROPS_H
 
 #include <jsi/jsi.h>
 #include <react/renderer/components/view/ViewProps.h>

@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-#ifndef EVENT_EMITTERS_H  // 如果没有定义 EVENT_EMITTERS_H，则编译以下内容
-#define EVENT_EMITTERS_H
+#ifndef HARMONY_NESTED_SCROLL_EVENT_EMITTERS_H  // 如果没有定义 EVENT_EMITTERS_H，则编译以下内容
+#define HARMONY_NESTED_SCROLL_EVENT_EMITTERS_H
 
 #include <cstdint>
 #include <react/renderer/components/view/ViewEventEmitter.h>
