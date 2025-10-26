@@ -57,10 +57,7 @@ NestedScrollViewNode::~NestedScrollViewNode() {
 }
 
 void NestedScrollViewNode::handleScroll() {
-    if (setNestedScrollResult) {
-        setNestedScrollResult = !setNestedScrollResult;
-        handleScrollView(child);
-    }
+    handleScrollView(child);
 }
 
 void NestedScrollViewNode::setChild(ComponentInstance::Shared childComponentInstance) {
