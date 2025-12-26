@@ -43,6 +43,7 @@ facebook::react::Point NestedScrollViewComponentInstance::getCurrentOffset() con
 void NestedScrollViewComponentInstance::onFinalizeUpdates() {
   ComponentInstance::onFinalizeUpdates();
     float scrollHeight = 0.0f;
+    headerHeight = this->getLocalRootArkUINode().getHeaderChild()->getLayoutMetrics().frame.size.height;
     if (rNCNestedScrollViewHeaderNative != nullptr) {
         scrollHeight = headerHeight - rNCNestedScrollViewHeaderNative->stickyHeaderHeight;
     }
@@ -56,7 +57,7 @@ void NestedScrollViewComponentInstance::onChildInserted(
     if (childComponentInstance->getComponentName() == "RNCNestedScrollViewHeaderNative") {
         elementPositionRelativeFixHeader = true;//记录元素在固定的头部还是尾部
         rNCNestedScrollViewHeaderNative = std::dynamic_pointer_cast<NestedScrollViewHeaderComponentInstance>(childComponentInstance);
-        headerHeight = childComponentInstance->getLayoutMetrics().frame.size.height;
+        this->getLocalRootArkUINode().setHeaderChild(childComponentInstance);
         fixColumnAll.insertChild(childComponentInstance->getLocalRootArkUINode(), index);
     } else {
         this->getLocalRootArkUINode().setChild(childComponentInstance);

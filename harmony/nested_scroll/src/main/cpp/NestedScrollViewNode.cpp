@@ -57,11 +57,20 @@ NestedScrollViewNode::~NestedScrollViewNode() {
 }
 
 void NestedScrollViewNode::handleScroll() {
-    handleScrollView(child);
+    if (child) {
+        handleScrollView(child);
+    }
 }
 
 void NestedScrollViewNode::setChild(ComponentInstance::Shared childComponentInstance) {
     child = childComponentInstance;
+}
+
+void NestedScrollViewNode::setHeaderChild(ComponentInstance::Shared childComponentInstance) {
+    headerChild = childComponentInstance;
+}
+ComponentInstance::Shared NestedScrollViewNode::getHeaderChild(){
+    return headerChild;
 }
 
 void NestedScrollViewNode::handleScrollView(ComponentInstance::Shared childComponentInstance){

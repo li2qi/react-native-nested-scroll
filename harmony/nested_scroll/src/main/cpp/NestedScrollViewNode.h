@@ -39,6 +39,7 @@ namespace rnoh {
     private:
         bool setNestedScrollResult = true;
         ComponentInstance::Shared child;
+        ComponentInstance::Shared headerChild;
     protected:
         NestedScrollNodeDelegate *m_scrollNodeDelegate;
     public:
@@ -55,6 +56,9 @@ namespace rnoh {
         void setChild(ComponentInstance::Shared childComponentInstance);
         void handleScroll();
         facebook::react::Point getScrollOffset() const;
+        void setHeaderChild(ComponentInstance::Shared childComponentInstance);
+        ComponentInstance::Shared getHeaderChild();
+    
     };
 
 } // namespace rnoh
