@@ -43,7 +43,9 @@ facebook::react::Point NestedScrollViewComponentInstance::getCurrentOffset() con
 void NestedScrollViewComponentInstance::onFinalizeUpdates() {
   ComponentInstance::onFinalizeUpdates();
     float scrollHeight = 0.0f;
-    headerHeight = this->getLocalRootArkUINode().getHeaderChild()->getLayoutMetrics().frame.size.height;
+	if (this->getLocalRootArkUINode().getHeaderChild() != nullptr) {
+		headerHeight = this->getLocalRootArkUINode().getHeaderChild()->getLayoutMetrics().frame.size.height;
+	}
     if (rNCNestedScrollViewHeaderNative != nullptr) {
         scrollHeight = headerHeight - rNCNestedScrollViewHeaderNative->stickyHeaderHeight;
     }
