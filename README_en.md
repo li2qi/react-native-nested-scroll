@@ -1,22 +1,21 @@
-> 模板版本：v0.4.1
+> Template Version: v0.4.1
 
 <p align="center">
   <h1 align="center"> <code>react-native-nested-scroll</code> </h1>
 </p>
 
-本项目基于 [react-native-nested-scroll@0.14.0](https://github.com/sdcxtech/react-native-troika/tree/master/packages/nested-scroll) 开发。
+This project is developed based on [react-native-nested-scroll@0.14.0](https://github.com/sdcxtech/react-native-troika/tree/master/packages/nested-scroll).
 
-
-| 三方库名称                                           | 三方库版本            | 发布信息                                                                        | 支持RN版本          | Autolink | 编译API版本 | 社区基线版本 | npm地址                                                                                      |
+| Name    | Version    | Release Information     | Supported RN Version    | Supported Autolink     | Compile API Version     | Community Baseline Version    | npm Address                |
 | ----------------------------------------------- | ---------------- | --------------------------------------------------------------------------- | --------------- | -------- | ------- | ------ | ------------------------------------------------------------------------------------------ |
 | @react-native-oh-tpl/react-native-nested-scroll | ~0.14.2  | [Github Releases](https://github.com/react-native-oh-library/react-native-nested-scroll/releases) | 0.72  | 否 | API12+ | 0.14.0 | [Npm Address](https://www.npmjs.com/package/@react-native-oh-tpl/react-native-nested-scroll) |
 
-## 安装与使用
 
-请到三方库的 Releases 发布地址查看配套的版本信息：[@react-native-oh-tpl/react-native-nested-scroll Releases](https://github.com/react-native-oh-library/react-native-nested-scroll/releases) 。对于未发布到npm的旧版本，请参考[安装指南](./tgz-usage.md)安装tgz包。
+## Installation and Usage
 
+Please go to the Releases release address of the third-party library to view the supporting version information: [@react-native-oh-tpl/react-native-nested-scroll Releases](https://github.com/react-native-oh-library/react-native-nested-scroll/releases). For older versions that are not published to npm, install the tgz package by referring to the [Installation Guide](/en-us/tgz-usage.md).
 
-进入到工程目录并输入以下命令：
+Navigate to your project directory and enter the following command:
 
 <!-- tabs:start -->
 
@@ -36,17 +35,19 @@ yarn add @react-native-oh-tpl/react-native-nested-scroll
 
 ## Link
 
-|                                      | 是否支持autolink | RN框架版本 |
+|                                      | Is supported autolink  | Supported RN Version |
 |--------------------------------------|-----------------------|----------------------|
-| ~0.14.2                              |  否              |  0.72     |
+| ~0.14.2                              |  No              |  0.72     |
 
-此步骤为手动配置原生依赖项的指导
+this step is a guide to manually configure native dependencies.
+
+First, use DevEco Studio to open the HarmonyOS project `harmony` in the project directory.
 
 ### 1. Overrides RN SDK
 
-为了让工程依赖同一个版本的 RN SDK，需要在工程根目录的 `harmony/oh-package.json5` 添加 overrides 字段，指向工程需要使用的 RN SDK 版本。替换的版本既可以是一个具体的版本号，也可以是一个模糊版本，还可以是本地存在的 HAR 包或源码目录。
+To ensure the project depends on the same version of the RN SDK, you need to add an `overrides` field in the `harmony/oh-package.json5` file at the project's root directory. This field should point to the RN SDK version required by the project. The version can be a specific version number, a fuzzy version, a local HAR package, or a source code directory.
 
-关于该字段的作用请阅读[官方说明](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/ide-oh-package-json5-V5#zh-cn_topic_0000001792256137_overrides)
+For more information about this field, please refer to the [official documentation](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/ide-oh-package-json5-V5#zh-cn_topic_0000001792256137_overrides).
 
 ```json
 {
@@ -56,18 +57,19 @@ yarn add @react-native-oh-tpl/react-native-nested-scroll
 }
 ```
 
-### 2. 引入原生端代码
+### 2. Importing Native Code
 
-目前有两种方法：
+There are currently two methods:
 
-- 通过 har 包引入；
-- 直接链接源码。
+- By importing HAR packages;
+- By directly linking the source code.
 
-方法一：通过 har 包引入（推荐）
+Method 1: Importing via HAR package (Recommended)
 
-> [!TIP] har 包位于三方库安装路径的 `harmony` 文件夹下。
+> [!TIP]
+> The HAR package is located in the `harmony` folder of the third-party library's installation path.
 
-打开 `entry/oh-package.json5`，添加以下依赖
+Open `entry/oh-package.json5` and add the following dependency:
 
 ```json
 "dependencies": {
@@ -75,22 +77,23 @@ yarn add @react-native-oh-tpl/react-native-nested-scroll
   }
 ```
 
-点击右上角的 `sync` 按钮
+Click the `sync` button in the top right corner.
 
-或者在终端执行：
+Or execute in the terminal:
 
 ```bash
 cd entry
 ohpm install
 ```
 
-方法二：直接链接源码
+Method 2: Directly linking the source code
 
-> [!TIP] 如需使用直接链接源码，请参考[直接链接源码说明](/link-source-code.md)
+> [!TIP]
+> To link the source code directly, please refer to the [instructions for linking source code directly](/zh-cn/link-source-code.md).
 
-### 3. 配置 CMakeLists 和引入 NestedScrollViewPackage
+### 3. Configure CMakeLists and Import NestedScrollViewPackage
 
-打开 `entry/src/main/cpp/CMakeLists.txt`，添加：
+Open `entry/src/main/cpp/CMakeLists.txt` and add the following:
 
 ```diff
 + set(OH_MODULES "${CMAKE_CURRENT_SOURCE_DIR}/../../../oh_modules")
@@ -104,7 +107,7 @@ ohpm install
 # RNOH_END: manual_package_linking_2
 ```
 
-打开 `entry/src/main/cpp/PackageProvider.cpp`，添加：
+Open `entry/src/main/cpp/PackageProvider.cpp` and add the following:
 
 ```diff
 #include "RNOH/PackageProvider.h"
@@ -120,33 +123,37 @@ std::vector<std::shared_ptr<Package>> PackageProvider::getPackages(Package::Cont
     };
 }
 ```
-### 运行
+</details>
 
-点击右上角的 `sync` 按钮
+### Running
 
-或者在终端执行：
+Click the `sync` button in the top right corner.
+
+Or execute in the terminal:
 
 ```bash
 cd entry
 ohpm install
 ```
 
-然后编译、运行即可。
+Then, build and run the project.
 
-## 约束与限制
+## Constraints and Limitations
 
-### 兼容性
+### Compatibility
 
-要使用此库，需要使用正确的 React-Native 和 RNOH 版本。另外，还需要使用配套的 DevEco Studio 和 手机 ROM。
+To use this repository, you need to use the correct React-Native and RNOH versions. In addition, you need to use DevEco Studio and the ROM on your phone.
 
-在以下版本验证通过：
+Verified in the following versions.
 1. RNOH: 0.72.96; SDK: HarmonyOS 6.0.0 Release SDK; IDE: DevEco Studio 6.0.0.858; ROM: 6.0.0.112;
 
-## 使用示例
 
-下面的代码展示了这个库的基本使用场景：
+## Example
 
-> [!WARNING] 使用时 import 的库名不变。
+The following code demonstrates the basic usage of this library:
+
+> [!WARNING]
+> The import name of the library remains the same when used.
 
 ```js
 import {StyleSheet, View} from 'react-native';
@@ -207,34 +214,26 @@ const styles = StyleSheet.create({
 });
 ```
 
-## 使用说明
+## Available APIs
 
-```js
-<NestedScrollView style={styles.coordinator} bounces = {false}>
-   <NestedScrollViewHeader stickyHeight={60}>
-        <Image source={require('../assets/cover.webp')} style={styles.image} resizeMode="cover" />
-        <Text style={styles.text}>anchor</Text>
-    </NestedScrollViewHeader>
-</NestedScrollView>
-```
+> [!TIP]
+> The "Platform" column indicates the platforms on which these props are supported in the original third-party library.
 
-## 接口说明
+> [!TIP]
+> If the value in the "HarmonyOS Support" column is "yes," it means the prop is supported on the HarmonyOS platform; "no" means it is not supported; "partially" means that some of its features are supported. The usage of this prop is the same on different platforms, and its effect is consistent with that on iOS or Android.
 
-> [!TIP] "Platform" 列表示这些属性在原始第三方库中支持的平台。
+| Name                   | Description                                                                                       | Type    | Required | Platform | HarmonyOS Support |
+| ---------------------- | ------------------------------------------------------------------------------------------------- | ------- | -------- | -------- | ----------------- |
+| stickyHeight           | The area of the header height will be pinned to the top.                                          | number  | NO       | All      | yes               |
+| stickyHeaderBeginIndex | It means that starting with the first few subcomponents, the subassemblies will be pinned to the top. | number  | NO       | All      | yes               |
+| bounce                 | Elastic effect.                                                                                   | boolean | NO       | All      | yes               |
+| onScroll               | Component callbacks.                                                                              | number  | NO       | All      | yes               |
 
-> [!TIP] "如果“HarmonyOS 支持”列的值为“yes”，则表示 HarmonyOS 平台支持该属性；“no”则表示不支持；“partially”表示部分支持该属性的功能。该属性在不同平台上的使用方法相同，效果与 iOS 或 Android 平台一致。
+## Known Issues
 
-| Name        | Description                                       | Type   | Required | Platform | HarmonyOS Support |
-| ----------- | ------------------------------------------------- | ------ | -------- | -------- | ----------------- |
-| stickyHeight| 标题高度的区域会固定在顶部                                      | number | NO       | All      | yes               |
-| stickyHeaderBeginIndex | 这意味着从前几个子组件开始，子组件将固定在顶部 | number | NO       | All      | yes               |
-| bounce    | 弹性效果                               | boolean | NO       | All      | yes               |
-| onScroll    |组件回调                             | function | NO       | All      | yes               |
+None
 
-## 遗留问题
-无
-
-## 目录结构
+## Directory Structure
 
 /react-native-nested-scroll
 ├── harmony/                          # HarmonyOS 原生模块代码
@@ -289,10 +288,10 @@ const styles = StyleSheet.create({
 └── LICENSE
 
 
-## 贡献代码
+## How to Contribute
 
-使用过程中发现任何问题都可以提交 [Issue](https://gitcode.com/CPF-RN/rntpc_react-native-nested-scroll/issues)，当然，也非常欢迎提交 [PR](https://github.com/react-native-oh-library/react-native-nested-scroll/pulls) 。
+使用过程中发现任何问题都可以提交 [Issue](https://gitcode.com/CPF-RN/rntpc_react-native-nested-scroll/issues)，当然，也非常欢迎提交 [PR](https://github.com/react-native-oh-library/react-native-nested-scroll/pulls).
 
-## 开源协议
+## 6. Open Source License
 
-本项目基于 [The MIT License (MIT)](https://github.com/sdcxtech/react-native-troika/blob/master/packages/nested-scroll/LICENSE)，请自由地享受和参与开源。
+This project is based on [The MIT License (MIT)](https://github.com/sdcxtech/react-native-troika/blob/master/packages/nested-scroll/LICENSE), feel free to enjoy and participate in open source.
