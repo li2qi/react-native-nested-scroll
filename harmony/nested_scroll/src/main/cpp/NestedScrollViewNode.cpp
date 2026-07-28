@@ -76,6 +76,7 @@ ComponentInstance::Shared NestedScrollViewNode::getHeaderChild(){
 void NestedScrollViewNode::handleScrollView(ComponentInstance::Shared childComponentInstance){
      if (OH_ArkUI_NodeUtils_GetNodeType(childComponentInstance->getLocalRootArkUINode().getArkUINodeHandle()) == 
          ARKUI_NODE_SCROLL ) {
+        setBounce(childComponentInstance->getLocalRootArkUINode().getArkUINodeHandle(), bounces);
         setNestedScrollMode(childComponentInstance);
     } else {
         std::vector<ComponentInstance::Shared> children = childComponentInstance->getChildren();
@@ -93,6 +94,12 @@ void NestedScrollViewNode::insertChild(ArkUINode &child, std::size_t index) {
 
 void NestedScrollViewNode::removeChild(ArkUINode &child) {
     maybeThrow(NativeNodeApi::getInstance()->removeChild(m_nodeHandle, child.getArkUINodeHandle()));
+}
+
+void NestedScrollViewNode::setBounceChange(bool bounces) {
+    if (child) {
+        setBounce(child->getLocalRootArkUINode().getArkUINodeHandle(), bounces);
+    }
 }
 
 void NestedScrollViewNode::setBounce(ArkUI_NodeHandle node, bool bounces) {

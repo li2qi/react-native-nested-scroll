@@ -43,9 +43,11 @@ namespace rnoh {
                 return;
             }
           if (eventName == "onScroll") {
-                float contentOffsetX = (float)arkJs.getDouble(arkJs.getObjectProperty(ctx.payload, "x"));
-                float contentOffsetY = (float)arkJs.getDouble(arkJs.getObjectProperty(ctx.payload, "y"));
-                facebook::react::NestedScrollViewHeaderEventEmitter::NestedScrollHeaderEvent nestedScrollHeaderEvent{contentOffsetX, contentOffsetY};
+                auto contentOffsetObj = arkJs.getObjectProperty(ctx.payload, "contentOffset");
+                float contentOffsetX = (float)arkJs.getDouble(arkJs.getObjectProperty(contentOffsetObj, "x"));
+                float contentOffsetY = (float)arkJs.getDouble(arkJs.getObjectProperty(contentOffsetObj, "y"));
+                facebook::react::NestedScrollViewHeaderEventEmitter::NestedScrollHeaderEvent nestedScrollHeaderEvent{
+                    facebook::react::NestedScrollViewHeaderEventEmitter::ContentOffset{contentOffsetX, contentOffsetY}};
                 eventEmitter->onScroll(nestedScrollHeaderEvent);
             } 
         }

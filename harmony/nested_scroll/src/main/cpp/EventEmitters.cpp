@@ -39,8 +39,10 @@ namespace facebook {
         void NestedScrollViewHeaderEventEmitter::onScroll(NestedScrollHeaderEvent event) const {
             dispatchEvent("scroll", [event = std::move(event)](jsi::Runtime &runtime) {
                 auto payload = jsi::Object(runtime);
-                payload.setProperty(runtime, "x", event.x);
-                payload.setProperty(runtime, "y", event.y);
+                auto contentOffset = jsi::Object(runtime);
+                contentOffset.setProperty(runtime, "x", event.contentOffset.x);
+                contentOffset.setProperty(runtime, "y", event.contentOffset.y);
+                payload.setProperty(runtime, "contentOffset", contentOffset);
                 return payload;
             });
         }

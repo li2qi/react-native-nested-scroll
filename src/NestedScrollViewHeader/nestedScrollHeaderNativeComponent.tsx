@@ -15,8 +15,10 @@ import {
   } from 'react-native/Libraries/Types/CodegenTypes';
 
   export type NestedScrollEvent = Readonly<{
-    x: Int32;
-    y: Int32;
+    contentOffset: Readonly<{
+      x: Int32;
+      y: Int32;
+    }>;
   }>
 
   export interface NestedScrollViewHeaderProps extends ViewProps {

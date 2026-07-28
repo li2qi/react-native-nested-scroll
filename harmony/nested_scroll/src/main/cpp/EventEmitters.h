@@ -35,9 +35,13 @@ namespace facebook {
         class JSI_EXPORT NestedScrollViewHeaderEventEmitter : public ViewEventEmitter {
         public:
             using ViewEventEmitter::ViewEventEmitter;
-            struct NestedScrollHeaderEvent {
+            struct ContentOffset {
                 Float x;
                 Float y;
+            };
+
+            struct NestedScrollHeaderEvent {
+                ContentOffset contentOffset;
             };
             void onScroll(NestedScrollHeaderEvent value) const;
         };
