@@ -156,62 +156,78 @@ The following code demonstrates the basic usage of this library:
 > The import name of the library remains the same when used.
 
 ```js
-import {StyleSheet, View} from 'react-native';
-import {NestedScrollView} from '@react-native-oh-tpl/react-native-nested-scroll';
+import React from 'react';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {NestedScrollView, NestedScrollViewHeader} from '@react-native-oh-tpl/react-native-nested-scroll';
 
-import {FlatListPage} from './FlatListPage';
-import {ParallaxHeader} from './ParallaxHeader';
-import {useAnimateScrollView} from './hooks/useAnimatedScrollView';
-import AnimatedNavbar from './AnimatedNavbar';
-import {TopNavBar} from './components/TopNavBar';
-import {HeaderNavBar} from './components/HeaderNavBar';
-import {HeaderComponent} from './components/HeaderComponent';
+function NestedScrollFlatList() {
+  return (
+    <NestedScrollView style={styles.coordinator} bounces = {false}>
+      <NestedScrollViewHeader stickyHeight={60}>
+        <Text style={styles.text}>anchorTest</Text>
+        <Text style={styles.text}>anchor</Text>
+      </NestedScrollViewHeader>
 
-// Within your render function
-function NestedScrollParallaxHeader() {
-    const imageHeight = 220;
-    const [scroll, onScroll, scale, translateYDown, translateYUp] = useAnimateScrollView(
-        imageHeight,
-        false,
-    );
+      <View style={{ height: "90%"}}>
 
-    return (
-      <View style={styles.fill}>
-        <NestedScrollView bounces>
-            <ParallaxHeader
-                topBarHeight={180}
-                imageHeight={180}
-                imageSource={require('../assets/cover.webp')}
-                scale={scale}
-                translateYDown={translateYDown}
-                translateYUp={translateYUp}>
-                <HeaderComponent />
-            </ParallaxHeader>
-            <FlatListPage />
-        </NestedScrollView>
-
-        <AnimatedNavbar
-            scroll={scroll}
-            headerHeight={50}//topBarHeight()}
-            statusBarHeight={80}//statusBarHeight()}
-            imageHeight={imageHeight}
-            OverflowHeaderComponent={<HeaderNavBar />}
-            TopNavbarComponent={<TopNavBar />}
-            /> 
+        <ScrollView> 
+          <Text style={{ height: 30}}>test1</Text>
+          <Text style={{ height: 30}}>test2</Text>
+          <Text style={{ height: 30}}>test3</Text>
+          <Text style={{ height: 30}}>test4</Text>
+          <Text style={{ height: 30}}>test5</Text>
+          <Text style={{ height: 30}}>test6</Text>
+          <Text style={{ height: 30}}>test7</Text>
+          <Text style={{ height: 30}}>test8</Text>
+          <Text style={{ height: 30}}>test9</Text>
+          <Text style={{ height: 30}}>test10</Text>
+          <Text style={{ height: 30}}>test11</Text>
+          <Text style={{ height: 30}}>test12</Text>
+          <Text style={{ height: 30}}>test13</Text>
+          <Text style={{ height: 30}}>test14</Text>
+          <Text style={{ height: 30}}>test15</Text>
+          <Text style={{ height: 30}}>test16</Text>
+          <Text style={{ height: 30}}>test17</Text>
+          <Text style={{ height: 30}}>test18</Text>
+          <Text style={{ height: 30}}>test19</Text>
+          <Text style={{ height: 30}}>test20</Text>
+          <Text style={{ height: 30}}>test21</Text>
+          <Text style={{ height: 30}}>test22</Text>
+          <Text style={{ height: 30}}>test23</Text>
+          <Text style={{ height: 30}}>test24</Text>
+          <Text style={{ height: 30}}>test25</Text>
+          <Text style={{ height: 30}}>test26</Text>
+          <Text style={{ height: 30}}>test27</Text>
+          <Text style={{ height: 30}}>test28</Text>
+          <Text style={{ height: 30}}>test29</Text>
+          <Text style={{ height: 30}}>test30</Text>
+        </ScrollView>
       </View>
+    </NestedScrollView>
   );
 }
-export default NestedScrollParallaxHeader;
-// Later on in your styles..
+
 const styles = StyleSheet.create({
-    fill: {
-        flex: 1,
-    },
-    image: {
-        height: 160,
-        width: '100%',
-    },
+  coordinator: {
+    backgroundColor: '#fff',
+  },
+  content: {
+    backgroundColor: '#0000FF',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    height: 160,
+    width: '100%',
+  },
+  text: {
+    lineHeight: 60,
+    fontSize: 18,
+    color: '#0xCCCCCC',
+  },
 });
+export default NestedScrollFlatList
+
 ```
 
 ## Available APIs
@@ -235,6 +251,7 @@ None
 
 ## Directory Structure
 
+```
 /react-native-nested-scroll
 ├── harmony/                          # HarmonyOS 原生模块代码
 │   └── nested_scroll/
@@ -286,7 +303,7 @@ None
 ├── README.md
 ├── README.OpenSource
 └── LICENSE
-
+```
 
 ## How to Contribute
 
