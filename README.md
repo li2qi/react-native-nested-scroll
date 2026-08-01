@@ -239,11 +239,16 @@ export default NestedScrollFlatList
 
 > [!TIP] "如果“HarmonyOS 支持”列的值为“yes”，则表示 HarmonyOS 平台支持该属性；“no”则表示不支持；“partially”表示部分支持该属性的功能。该属性在不同平台上的使用方法相同，效果与 iOS 或 Android 平台一致。
 
+### NestedScrollView
+| Name        | Description                                       | Type   | Required | Platform | HarmonyOS Support |
+| ----------- | ------------------------------------------------- | ------ | -------- | -------- | ----------------- |
+| bounces    | 弹性效果                               | boolean | NO       | All      | yes               |
+
+### NestedScrollViewHeader
 | Name        | Description                                       | Type   | Required | Platform | HarmonyOS Support |
 | ----------- | ------------------------------------------------- | ------ | -------- | -------- | ----------------- |
 | stickyHeight| 标题高度的区域会固定在顶部                                      | number | NO       | All      | yes               |
 | stickyHeaderBeginIndex | 这意味着从前几个子组件开始，子组件将固定在顶部 | number | NO       | All      | yes               |
-| bounce    | 弹性效果                               | boolean | NO       | All      | yes               |
 | onScroll    |组件回调                             | function | NO       | All      | yes               |
 
 ## 遗留问题

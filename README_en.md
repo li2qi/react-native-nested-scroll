@@ -238,12 +238,17 @@ export default NestedScrollFlatList
 > [!TIP]
 > If the value in the "HarmonyOS Support" column is "yes," it means the prop is supported on the HarmonyOS platform; "no" means it is not supported; "partially" means that some of its features are supported. The usage of this prop is the same on different platforms, and its effect is consistent with that on iOS or Android.
 
-| Name                   | Description                                                                                       | Type    | Required | Platform | HarmonyOS Support |
-| ---------------------- | ------------------------------------------------------------------------------------------------- | ------- | -------- | -------- | ----------------- |
-| stickyHeight           | The area of the header height will be pinned to the top.                                          | number  | NO       | All      | yes               |
-| stickyHeaderBeginIndex | It means that starting with the first few subcomponents, the subassemblies will be pinned to the top. | number  | NO       | All      | yes               |
-| bounce                 | Elastic effect.                                                                                   | boolean | NO       | All      | yes               |
-| onScroll               | Component callbacks.                                                                              | number  | NO       | All      | yes               |
+### NestedScrollView
+| Name        | Description                                       | Type   | Required | Platform | HarmonyOS Support |
+| ----------- | ------------------------------------------------- | ------ | -------- | -------- | ----------------- |
+| bounces    | Elastic effect                               | boolean | NO       | All      | yes               |
+
+### NestedScrollViewHeader
+| Name        | Description                                       | Type   | Required | Platform | HarmonyOS Support |
+| ----------- | ------------------------------------------------- | ------ | -------- | -------- | ----------------- |
+| stickyHeight| The area of the header height will be pinned to the top                                      | number | NO       | All      | yes               |
+| stickyHeaderBeginIndex | It means that starting with the first few subcomponents, the subassemblies will be pinned to the top | number | NO       | All      | yes               |
+| onScroll    |component callbacks                             | function | NO       | All      | yes               |
 
 ## Known Issues
 
