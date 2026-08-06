@@ -62,7 +62,7 @@ void NestedScrollViewComponentInstance::onChildInserted(
         this->getLocalRootArkUINode().setHeaderChild(childComponentInstance);
         fixColumnAll.insertChild(childComponentInstance->getLocalRootArkUINode(), index);
     } else {
-        this->getLocalRootArkUINode().setChild(childComponentInstance);
+        this->getLocalRootArkUINode().addChild(childComponentInstance);
         fixColumnAll.insertChild(childComponentInstance->getLocalRootArkUINode(), index);
     }
 }
@@ -75,6 +75,7 @@ void NestedScrollViewComponentInstance::onLayoutChanged(
 void NestedScrollViewComponentInstance::onChildRemoved(
     ComponentInstance::Shared const& childComponentInstance) {
   CppComponentInstance::onChildRemoved(childComponentInstance);
+  mNestedScrollNode.removeChildInstance(childComponentInstance);
   mNestedScrollNode.removeChild(
       childComponentInstance->getLocalRootArkUINode());
 }
@@ -92,10 +93,7 @@ void NestedScrollViewComponentInstance::onPropsChanged(SharedConcreteProps const
 void NestedScrollViewComponentInstance::onScroll(facebook::react::NestedScrollViewEventEmitter::NestedScrollEvent nestedScrollEvent) {
     auto item = NativeNodeApi::getInstance()->getAttribute(mNestedScrollNode.getArkUINodeHandle(), NODE_SCROLL_OFFSET);
     facebook::react::NestedScrollViewHeaderEventEmitter::NestedScrollHeaderEvent nestedScrollHeaderEvent{
-                facebook::react::NestedScrollViewHeaderEventEmitter::ContentOffset{
-                    item->value[0].f32,
-                    item->value[1].f32
-                }
+                {item->value[0].f32, item->value[1].f32}
             };
     rNCNestedScrollViewHeaderNative->onScroll(nestedScrollHeaderEvent);
 }

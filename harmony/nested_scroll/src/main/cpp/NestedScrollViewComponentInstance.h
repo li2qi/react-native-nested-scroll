@@ -38,7 +38,7 @@ class NestedScrollViewComponentInstance : public CppComponentInstance<facebook::
 private:
    
     std::shared_ptr<NestedScrollViewHeaderComponentInstance> rNCNestedScrollViewHeaderNative {nullptr};
-    
+    bool bounces;
     bool elementPositionRelativeFixHeader = false;
 
 public:
