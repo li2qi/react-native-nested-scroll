@@ -46,8 +46,7 @@ namespace rnoh {
                 auto contentOffsetObj = arkJs.getObjectProperty(ctx.payload, "contentOffset");
                 float contentOffsetX = (float)arkJs.getDouble(arkJs.getObjectProperty(contentOffsetObj, "x"));
                 float contentOffsetY = (float)arkJs.getDouble(arkJs.getObjectProperty(contentOffsetObj, "y"));
-                facebook::react::NestedScrollViewHeaderEventEmitter::NestedScrollHeaderEvent nestedScrollHeaderEvent{
-                    facebook::react::NestedScrollViewHeaderEventEmitter::ContentOffset{contentOffsetX, contentOffsetY}};
+                facebook::react::NestedScrollViewHeaderEventEmitter::NestedScrollHeaderEvent nestedScrollHeaderEvent{{contentOffsetX, contentOffsetY}};
                 eventEmitter->onScroll(nestedScrollHeaderEvent);
             } 
         }
