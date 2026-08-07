@@ -1,5 +1,5 @@
 {
-  "name": "@react-native-oh-tpl/react-native-nested-scroll",
+  "name": "@react-native-ohos/react-native-nested-scroll",
   "description": "A react-native NestedScrollView component.",
   "version": "0.14.3-rc.2",
   "main": "./src/index.tsx",
@@ -55,7 +55,7 @@
     ]
   },
   "harmony": {
-    "alias": "react-native-nested-events"
+    "alias": "react-native-nested-scroll"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
