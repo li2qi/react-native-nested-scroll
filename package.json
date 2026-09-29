@@ -5,9 +5,11 @@
   "main": "./src/index.tsx",
   "react-native": "src/index",
   "nativePackage": true,
+  "homepage": "https://github.com/react-native-oh-library/react-native-nested-scroll/blob/master/README.md",
   "files": [
     "harmony",
     "src",
+	"CHANGELOG.md",
 	"package.json"
   ],
   "repository": "https://github.com/react-native-oh-library/react-native-nested-scroll",
@@ -15,11 +17,16 @@
   "license": "MIT",
   "keywords": [
     "react-native",
-    "nested-scroll"
+    "nested-scroll",
+	"harmony",
+	"ohos",
+	"openharmony",
+	"rnoh"
   ],
   "scripts": {
     "tsc": "tsc",
-    "test": "jest",
+    "test": "jest --config jest/jest.config.js",
+    "test:coverage": "jest --config jest/jest.config.js --coverage",
     "lint": "eslint . --fix --ext .js,.jsx,.ts,.tsx"
   },
   "peerDependencies": {
