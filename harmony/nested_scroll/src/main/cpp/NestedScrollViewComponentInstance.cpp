@@ -24,6 +24,7 @@
 
 #include "NestedScrollViewHeaderComponentInstance.h"
 #include "NestedScrollViewComponentInstance.h"
+#include "NestedScrollPointerEvents.h"
 #include <regex>
 #include "RNOH/arkui/NativeNodeApi.h"
 
@@ -87,6 +88,7 @@ void NestedScrollViewComponentInstance::onPropsChanged(SharedConcreteProps const
     this->getLocalRootArkUINode().bounces = props->bounces;
     this->getLocalRootArkUINode().setBounceChange(props->bounces);
     this->getLocalRootArkUINode().setScrollBarOff(mNestedScrollNode.getArkUINodeHandle());
+    setNestedScrollPointerEvents(mNestedScrollNode, props->pointerEvents);
 
 }
 

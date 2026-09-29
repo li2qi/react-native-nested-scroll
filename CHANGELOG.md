@@ -2,6 +2,10 @@
 
 ## 鸿蒙化Log
 
+### v0.16.0-beta.1
+- feat: adapted for pointEvent events([#51](https://github.com/react-native-oh-library/react-native-nested-scroll/pull/51))
+- feat: Adapted for RN84 ([#51](https://github.com/react-native-oh-library/react-native-nested-scroll/pull/51))
+
 ### v0.15.0
 
 - release: @react-native-ohos/react-native-nested-scroll@0.15.0
