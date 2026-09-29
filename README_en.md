@@ -10,7 +10,10 @@ This third-party library supports direct download from npm, the new package name
 
 | Name | Version(Npm Address) | Release Information | Supported RN Version | Supported Autolink | Compile API Version | Community Baseline Version | Source code address |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| @react-native-ohos/react-native-nested-scroll | [~0.15.0](https://www.npmjs.com/package/@react-native-ohos/react-native-nested-scroll) | [Github Releases](https://github.com/react-native-oh-library/react-native-nested-scroll/releases) | 0.82.* | Yes | API12+ | 0.14.0 | [br_rnoh0.82](https://github.com/react-native-oh-library/react-native-nested-scroll/tree/br_rnoh0.82) |
+| @react-native-ohos/react-native-nested-scroll | [~0.16.0](https://www.npmjs.com/package/@react-native-ohos/react-native-nested-scroll) | [GitCode Releases](https://gitcode.com/CPF-RN/react-native-nested-scroll/releases) | 0.84.* | Yes | API12+ | 1.0.8 | [br_rnoh0.82](https://github.com/react-native-oh-library/react-native-nested-scroll/tree/master) |
+| @react-native-ohos/react-native-nested-scroll | [~0.15.0](https://www.npmjs.com/package/@react-native-ohos/react-native-nested-scroll) | [GitCode Releases](https://gitcode.com/CPF-RN/react-native-nested-scroll/releases) | 0.82.* | Yes | API12+ | 1.0.6 | [br_rnoh0.82](https://github.com/react-native-oh-library/react-native-nested-scroll/tree/br_rnoh0.82) |
+| @react-native-ohos/react-native-nested-scroll | [~0.14.3](https://www.npmjs.com/package/@react-native-ohos/react-native-nested-scroll) | [Github Releases](https://github.com/react-native-oh-library/react-native-nested-scroll/releases) | 0.72.* | No | API12+ | 0.14.0 | [sig](https://github.com/react-native-oh-library/react-native-nested-scroll/tree/sig) |
+| @react-native-oh-tpl/react-native-nested-scroll | [<=0.14.2@deprecated](https://www.npmjs.com/package/@react-native-oh-tpl/react-native-nested-scroll) | [Github Releases(deprecated)](https://github.com/react-native-oh-library/react-native-nested-scroll/releases) | 0.72.* | No | API12+ | 0.14.0 | [sig](https://github.com/react-native-oh-library/react-native-nested-scroll) |
 
 ## Introduction
 
@@ -37,7 +40,7 @@ yarn add @react-native-ohos/react-native-nested-scroll
 
 | Version | Supported Autolink | Supported RN Version |
 |------|--------------------|----------------------|
-| ~0.15.0 | Yes | 0.82.* |
+| ~0.16.0 | Yes | 0.84.* |
 
 Projects using AutoLink need to be configured according to this document, AutoLink framework guide: https://gitcode.com/CPF-RN/ohos_react_native/blob/main/docs/en/02-development/02-development-guide/autolinking.md
 
@@ -172,7 +175,8 @@ Then build and run the code.
 
 This document is verified based on the following versions:
 
-1. RNOH: 0.82.1; SDK: HarmonyOS 6.0.0 Release SDK; IDE: DevEco Studio 6.0.0.858; ROM: 6.0.0.112;
+1.  RNOH: 0.84.1; SDK: HarmonyOS 6.0.1 Release SDK; IDE: DevEco Studio 6.0.1 Release; ROM:6.0.0.328 SP26;
+
 
 ### Permission Requirements
 
@@ -271,10 +275,6 @@ export default NestedScrollFlatList
 </NestedScrollView>
 ```
 
-**Note**
-
-On Android, this library is implemented based on the NestedScrolling API. Remember to enable the `nestedScrollEnabled` property for the innermost scrollable views.
-
 ## Available APIs
 
 > [!TIP] The **Platform** column indicates the platform where the properties are supported in the original third-party library.
@@ -295,6 +295,7 @@ NestScrollProps
 | Name | Parameter Type | Default Value | Required | Platform | OpenHarmony Platform Support | Description |
 | --- | --- | --- | --- | --- | --- | --- |
 | bounces | boolean | false | no | iOS | Yes | Sets whether NestedScrollView is bouncy. Once set to true, the innermost scrollable view loses its bounce effect. |
+| pointerEvents | string | None | no | iOS、Android | Yes | Set NestedScrollView event penetration ('auto', 'none', 'box-only', 'box-none'). |
 
 NestedScrollViewHeaderProps
 
@@ -303,6 +304,7 @@ NestedScrollViewHeaderProps
 | stickyHeight | number | -1 | no | Android, iOS | Yes | Indicates how tall a region of the header will be pinned to the top. |
 | stickyHeaderBeginIndex | number | -1 | no | Android, iOS | Yes | Indicates the index of the child component from which child components will be pinned to the top. |
 | onScroll | function | None | no | Android, iOS | Yes | Scroll callback function, which can be used to implement a parallax effect for the header view. |
+| pointerEvents | string | None | no | iOS、Android | Yes | Set NestedScrollView event penetration ('auto', 'none', 'box-only', 'box-none'). |
 
 ## Known Issues
 

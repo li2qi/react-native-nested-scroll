@@ -24,6 +24,7 @@
 
 #include "NestedScrollViewComponentInstance.h"
 #include "NestedScrollViewHeaderComponentInstance.h"
+#include "NestedScrollPointerEvents.h"
 
 namespace rnoh {
 NestedScrollViewHeaderComponentInstance::NestedScrollViewHeaderComponentInstance(Context context)
@@ -69,6 +70,7 @@ void NestedScrollViewHeaderComponentInstance::onPropsChanged(SharedConcreteProps
     if (auto p = std::dynamic_pointer_cast<const facebook::react::RNCNestedScrollViewHeaderProps>(props)) {
         stickyHeight =  p->stickyHeight;
         stickyHeaderBeginIndex = p->stickyHeaderBeginIndex;
+        setNestedScrollPointerEvents(mNestedScrollHeaderNode, p->pointerEvents);
     }
 }
 

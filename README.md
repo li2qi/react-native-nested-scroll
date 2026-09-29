@@ -10,7 +10,10 @@
 
 | 三方库名称 | 三方库版本（npm地址） | 发布信息 | 支持RN版本 | Autolink | 编译API版本 | 社区基线版本 | 源码地址 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| @react-native-ohos/react-native-nested-scroll | [~0.15.0](https://www.npmjs.com/package/@react-native-ohos/react-native-nested-scroll) | [Github Releases](https://github.com/react-native-oh-library/react-native-nested-scroll/releases) | 0.82.* | 是 | API12+ | 0.14.0 | [br_rnoh0.82](https://github.com/react-native-oh-library/react-native-nested-scroll/tree/br_rnoh0.82) |
+| @react-native-ohos/react-native-nested-scroll | [~0.16.0](https://www.npmjs.com/package/@react-native-ohos/react-native-nested-scroll) | [GitCode Releases](https://gitcode.com/CPF-RN/react-native-nested-scroll/releases) | 0.84.* | 是 | API12+ | 1.0.8 | [br_rnoh0.82](https://github.com/react-native-oh-library/react-native-nested-scroll/tree/master) |
+| @react-native-ohos/react-native-nested-scroll | [~0.15.0](https://www.npmjs.com/package/@react-native-ohos/react-native-nested-scroll) | [GitCode Releases](https://gitcode.com/CPF-RN/react-native-nested-scroll/releases) | 0.82.* | 是 | API12+ | 1.0.6 | [br_rnoh0.82](https://github.com/react-native-oh-library/react-native-nested-scroll/tree/br_rnoh0.82) |
+| @react-native-ohos/react-native-nested-scroll | [~0.14.3](https://www.npmjs.com/package/@react-native-ohos/react-native-nested-scroll) | [Github Releases](https://github.com/react-native-oh-library/react-native-nested-scroll/releases) | 0.72.* | 否 | API12+ | 0.14.0 | [sig](https://github.com/react-native-oh-library/react-native-nested-scroll/tree/sig) |
+| @react-native-oh-tpl/react-native-nested-scroll | [<=0.14.2@deprecated](https://www.npmjs.com/package/@react-native-oh-tpl/react-native-nested-scroll) | [Github Releases(deprecated)](https://github.com/react-native-oh-library/react-native-nested-scroll/releases) | 0.72.* | 否 | API12+ | 0.14.0 | [sig](https://github.com/react-native-oh-library/react-native-nested-scroll) |
 
 ## 简介
 
@@ -37,7 +40,7 @@ yarn add @react-native-ohos/react-native-nested-scroll
 
 | 版本 | 是否支持autolink | RN框架版本 |
 |------|----------------|-----------|
-| ~0.15.0 | 是 | 0.82.* |
+| ~0.16.0 | 是 | 0.84.* |
 
 使用AutoLink的工程需要根据该文档配置，Autolink框架指导文档：https://gitcode.com/CPF-RN/ohos_react_native/blob/main/docs/zh-cn/02-开发/02-开发指南/Autolinking.md
 
@@ -172,7 +175,7 @@ ohpm install
 
 本文档内容基于以下版本验证通过：
 
-1. RNOH: 0.82.1; SDK: HarmonyOS 6.0.0 Release SDK; IDE: DevEco Studio 6.0.0.858; ROM: 6.0.0.112;
+1. RNOH: 0.84.1; SDK: HarmonyOS 6.0.1 Release SDK; IDE: DevEco Studio 6.0.1 Release; ROM:6.0.0.328 SP26;
 
 ### 权限要求
 
@@ -271,10 +274,6 @@ export default NestedScrollFlatList
 </NestedScrollView>
 ```
 
-**注意事项**
-
-在 Android 上，本库基于 NestedScrolling API 实现，请记得为最内层可滚动视图开启 `nestedScrollEnabled` 属性。
-
 ## 接口说明
 
 > [!TIP] "Platform"列表示该属性在原三方库上支持的平台。
@@ -295,6 +294,7 @@ NestScrollProps
 | 名称 | 参数类型 | 默认值 | 必填 | 平台 | OpenHarmony平台支持 | 描述 |
 | --- | --- | --- | --- | --- | --- | --- |
 | bounces | boolean | false | no | iOS | Yes | 设置 NestedScrollView 是否有弹性。一旦设置为 true，最内层可滚动视图将失去弹性。 |
+| pointerEvents | string | None | no | iOS、Android | Yes | 设置 NestedScrollView事件穿透('auto', 'none', 'box-only', 'box-none')。 |
 
 NestedScrollViewHeaderProps
 
@@ -303,6 +303,7 @@ NestedScrollViewHeaderProps
 | stickyHeight | number | -1 | no | Android、iOS | Yes | 表示 header 多高的区域将会被固定在顶部。 |
 | stickyHeaderBeginIndex | number | -1 | no | Android、iOS | Yes | 表示从第几个子组件开始，子组件将会被固定在顶部。 |
 | onScroll | function | None | no | Android、iOS | Yes | 滚动回调函数，可用于实现头部视图的视差效果。 |
+| pointerEvents | string | None | no | iOS、Android | Yes | 设置 NestedScrollHeader事件穿透('auto', 'none', 'box-only', 'box-none')。 |
 
 ## 遗留问题
 
